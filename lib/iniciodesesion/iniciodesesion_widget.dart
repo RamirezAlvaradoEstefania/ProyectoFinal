@@ -313,18 +313,6 @@ class _IniciodesesionWidgetState extends State<IniciodesesionWidget> {
                                                     .fromSTEB(0, 24, 0, 0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    final user =
-                                                        await signInWithEmail(
-                                                      context,
-                                                      emailAddressLoginController
-                                                          .text,
-                                                      passwordLoginController
-                                                          .text,
-                                                    );
-                                                    if (user == null) {
-                                                      return;
-                                                    }
-
                                                     await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -437,174 +425,114 @@ class _IniciodesesionWidgetState extends State<IniciodesesionWidget> {
                                                       MainAxisAlignment
                                                           .spaceEvenly,
                                                   children: [
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        final user =
-                                                            await signInWithGoogle(
-                                                                context);
-                                                        if (user == null) {
-                                                          return;
-                                                        }
-                                                        await Navigator
-                                                            .pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                InicioWidget(),
-                                                          ),
-                                                          (r) => false,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 50,
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 5,
+                                                            color: Color(
+                                                                0x3314181B),
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          )
+                                                        ],
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              'https://www.google.com.mx/');
+                                                        },
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons
+                                                              .google,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryText,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 5,
-                                                              color: Color(
-                                                                  0x3314181B),
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            )
-                                                          ],
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0, 0),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            await launchURL(
-                                                                'https://www.google.com.mx/');
-                                                          },
-                                                          child: FaIcon(
-                                                            FontAwesomeIcons
-                                                                .google,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            size: 24,
-                                                          ),
+                                                              .secondaryBackground,
+                                                          size: 24,
                                                         ),
                                                       ),
                                                     ),
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        final user =
-                                                            await signInWithApple(
-                                                                context);
-                                                        if (user == null) {
-                                                          return;
-                                                        }
-                                                        await Navigator
-                                                            .pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                InicioWidget(),
-                                                          ),
-                                                          (r) => false,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 50,
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 5,
+                                                            color: Color(
+                                                                0x3314181B),
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          )
+                                                        ],
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              'https://secure2.store.apple.com/mx/shop/signIn?ssi=1AAABgSKGa-0gQIAJd4rJBrVgrIBkXW9Ek_5C7wzzAly88H296VUQE_cAAAFSaHR0cHM6Ly93d3cuYXBwbGUuY29tL214Lz9hZmlkPXAyMzglN0NBdXVJTGZxUC1kY19tdGlkXzE4NzA3NjVlMzg0ODJfcGNyaWRfNzc3MjE5MTU5MTgwMjVfcGdyaWRfMjA1MjUzMDE3N19wbnR3a19vX3BjaGFuX19wZXhpZF9fJmNpZD1hb3MtbXgta3diaS1icmFuZC0tc2xpZC0tLXByb2R1Y3QtfGh0dHBzOi8vd3d3LmFwcGxlLmNvbS9teC8_YWZpZD1wMjM4JTdDQXV1SUxmcVAtZGNfbXRpZF8xODcwNzY1ZTM4NDgyX3BjcmlkXzc3NzIxOTE1OTE4MDI1X3BncmlkXzIwNTI1MzAxNzdfcG50d2tfb19wY2hhbl9fcGV4aWRfXyZjaWQ9YW9zLW14LWt3YmktYnJhbmQtLXNsaWQtLS1wcm9kdWN0LXwAAgGOP3RYRD754bAAr0GSVMxhItGK4b6-st_cPb-nfQf0Bg');
+                                                        },
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons
+                                                              .apple,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryText,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 5,
-                                                              color: Color(
-                                                                  0x3314181B),
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            )
-                                                          ],
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0, 0),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            await launchURL(
-                                                                'https://secure2.store.apple.com/mx/shop/signIn?ssi=1AAABgSKGa-0gQIAJd4rJBrVgrIBkXW9Ek_5C7wzzAly88H296VUQE_cAAAFSaHR0cHM6Ly93d3cuYXBwbGUuY29tL214Lz9hZmlkPXAyMzglN0NBdXVJTGZxUC1kY19tdGlkXzE4NzA3NjVlMzg0ODJfcGNyaWRfNzc3MjE5MTU5MTgwMjVfcGdyaWRfMjA1MjUzMDE3N19wbnR3a19vX3BjaGFuX19wZXhpZF9fJmNpZD1hb3MtbXgta3diaS1icmFuZC0tc2xpZC0tLXByb2R1Y3QtfGh0dHBzOi8vd3d3LmFwcGxlLmNvbS9teC8_YWZpZD1wMjM4JTdDQXV1SUxmcVAtZGNfbXRpZF8xODcwNzY1ZTM4NDgyX3BjcmlkXzc3NzIxOTE1OTE4MDI1X3BncmlkXzIwNTI1MzAxNzdfcG50d2tfb19wY2hhbl9fcGV4aWRfXyZjaWQ9YW9zLW14LWt3YmktYnJhbmQtLXNsaWQtLS1wcm9kdWN0LXwAAgGOP3RYRD754bAAr0GSVMxhItGK4b6-st_cPb-nfQf0Bg');
-                                                          },
-                                                          child: FaIcon(
-                                                            FontAwesomeIcons
-                                                                .apple,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            size: 24,
-                                                          ),
+                                                              .secondaryBackground,
+                                                          size: 24,
                                                         ),
                                                       ),
                                                     ),
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        final user =
-                                                            await signInWithFacebook(
-                                                                context);
-                                                        if (user == null) {
-                                                          return;
-                                                        }
-                                                        await Navigator
-                                                            .pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                InicioWidget(),
-                                                          ),
-                                                          (r) => false,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 50,
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 5,
+                                                            color: Color(
+                                                                0x3314181B),
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          )
+                                                        ],
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              'https://www.facebook.com/login.php');
+                                                        },
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons
+                                                              .facebookF,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryText,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 5,
-                                                              color: Color(
-                                                                  0x3314181B),
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            )
-                                                          ],
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0, 0),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            await launchURL(
-                                                                'https://www.facebook.com/login.php');
-                                                          },
-                                                          child: FaIcon(
-                                                            FontAwesomeIcons
-                                                                .facebookF,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            size: 24,
-                                                          ),
+                                                              .secondaryBackground,
+                                                          size: 24,
                                                         ),
                                                       ),
                                                     ),
@@ -901,33 +829,6 @@ class _IniciodesesionWidgetState extends State<IniciodesesionWidget> {
                                                     .fromSTEB(0, 24, 0, 0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    if (passwordController
-                                                            ?.text !=
-                                                        passwordConfirmController
-                                                            ?.text) {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'Passwords don\'t match!',
-                                                          ),
-                                                        ),
-                                                      );
-                                                      return;
-                                                    }
-
-                                                    final user =
-                                                        await createAccountWithEmail(
-                                                      context,
-                                                      emailAddressController
-                                                          .text,
-                                                      passwordController.text,
-                                                    );
-                                                    if (user == null) {
-                                                      return;
-                                                    }
-
                                                     await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -1009,174 +910,107 @@ class _IniciodesesionWidgetState extends State<IniciodesesionWidget> {
                                                       MainAxisAlignment
                                                           .spaceEvenly,
                                                   children: [
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        final user =
-                                                            await signInWithGoogle(
-                                                                context);
-                                                        if (user == null) {
-                                                          return;
-                                                        }
-                                                        await Navigator
-                                                            .pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                InicioWidget(),
-                                                          ),
-                                                          (r) => false,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 50,
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 5,
+                                                            color: Color(
+                                                                0x3314181B),
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          )
+                                                        ],
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0, 0),
+                                                      child: FaIcon(
+                                                        FontAwesomeIcons.google,
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        size: 24,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 5,
+                                                            color: Color(
+                                                                0x3314181B),
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          )
+                                                        ],
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              'https://secure2.store.apple.com/mx/shop/signIn?ssi=1AAABgSKGa-0gQIAJd4rJBrVgrIBkXW9Ek_5C7wzzAly88H296VUQE_cAAAFSaHR0cHM6Ly93d3cuYXBwbGUuY29tL214Lz9hZmlkPXAyMzglN0NBdXVJTGZxUC1kY19tdGlkXzE4NzA3NjVlMzg0ODJfcGNyaWRfNzc3MjE5MTU5MTgwMjVfcGdyaWRfMjA1MjUzMDE3N19wbnR3a19vX3BjaGFuX19wZXhpZF9fJmNpZD1hb3MtbXgta3diaS1icmFuZC0tc2xpZC0tLXByb2R1Y3QtfGh0dHBzOi8vd3d3LmFwcGxlLmNvbS9teC8_YWZpZD1wMjM4JTdDQXV1SUxmcVAtZGNfbXRpZF8xODcwNzY1ZTM4NDgyX3BjcmlkXzc3NzIxOTE1OTE4MDI1X3BncmlkXzIwNTI1MzAxNzdfcG50d2tfb19wY2hhbl9fcGV4aWRfXyZjaWQ9YW9zLW14LWt3YmktYnJhbmQtLXNsaWQtLS1wcm9kdWN0LXwAAgGOP3RYRD754bAAr0GSVMxhItGK4b6-st_cPb-nfQf0Bg');
+                                                        },
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons
+                                                              .apple,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryText,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 5,
-                                                              color: Color(
-                                                                  0x3314181B),
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            )
-                                                          ],
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0, 0),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            await launchURL(
-                                                                'https://www.google.com.mx/');
-                                                          },
-                                                          child: FaIcon(
-                                                            FontAwesomeIcons
-                                                                .google,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            size: 24,
-                                                          ),
+                                                              .secondaryBackground,
+                                                          size: 24,
                                                         ),
                                                       ),
                                                     ),
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        final user =
-                                                            await signInWithApple(
-                                                                context);
-                                                        if (user == null) {
-                                                          return;
-                                                        }
-                                                        await Navigator
-                                                            .pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                InicioWidget(),
-                                                          ),
-                                                          (r) => false,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 50,
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 5,
-                                                              color: Color(
-                                                                  0x3314181B),
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            )
-                                                          ],
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0, 0),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            await launchURL(
-                                                                'https://secure2.store.apple.com/mx/shop/signIn?ssi=1AAABgSKGa-0gQIAJd4rJBrVgrIBkXW9Ek_5C7wzzAly88H296VUQE_cAAAFSaHR0cHM6Ly93d3cuYXBwbGUuY29tL214Lz9hZmlkPXAyMzglN0NBdXVJTGZxUC1kY19tdGlkXzE4NzA3NjVlMzg0ODJfcGNyaWRfNzc3MjE5MTU5MTgwMjVfcGdyaWRfMjA1MjUzMDE3N19wbnR3a19vX3BjaGFuX19wZXhpZF9fJmNpZD1hb3MtbXgta3diaS1icmFuZC0tc2xpZC0tLXByb2R1Y3QtfGh0dHBzOi8vd3d3LmFwcGxlLmNvbS9teC8_YWZpZD1wMjM4JTdDQXV1SUxmcVAtZGNfbXRpZF8xODcwNzY1ZTM4NDgyX3BjcmlkXzc3NzIxOTE1OTE4MDI1X3BncmlkXzIwNTI1MzAxNzdfcG50d2tfb19wY2hhbl9fcGV4aWRfXyZjaWQ9YW9zLW14LWt3YmktYnJhbmQtLXNsaWQtLS1wcm9kdWN0LXwAAgGOP3RYRD754bAAr0GSVMxhItGK4b6-st_cPb-nfQf0Bg');
-                                                          },
-                                                          child: FaIcon(
-                                                            FontAwesomeIcons
-                                                                .apple,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            size: 24,
-                                                          ),
-                                                        ),
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 5,
+                                                            color: Color(
+                                                                0x3314181B),
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          )
+                                                        ],
+                                                        shape: BoxShape.circle,
                                                       ),
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        final user =
-                                                            await signInWithFacebook(
-                                                                context);
-                                                        if (user == null) {
-                                                          return;
-                                                        }
-                                                        await Navigator
-                                                            .pushAndRemoveUntil(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                InicioWidget(),
-                                                          ),
-                                                          (r) => false,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 50,
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              'https://www.facebook.com/login.php');
+                                                        },
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons
+                                                              .facebookF,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryText,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 5,
-                                                              color: Color(
-                                                                  0x3314181B),
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            )
-                                                          ],
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0, 0),
-                                                        child: InkWell(
-                                                          onTap: () async {
-                                                            await launchURL(
-                                                                'https://www.facebook.com/login.php');
-                                                          },
-                                                          child: FaIcon(
-                                                            FontAwesomeIcons
-                                                                .facebookF,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            size: 24,
-                                                          ),
+                                                              .secondaryBackground,
+                                                          size: 24,
                                                         ),
                                                       ),
                                                     ),
